@@ -12,7 +12,6 @@ searchBtn.addEventListener("click", function() {
     }
 });
 
-// query = sessionStorage.getItem('query') ? sessionStorage.getItem('query') : 'curated?per_page=20';
 if (sessionStorage.getItem("query")) {
     query = sessionStorage.getItem("query");
     document.querySelector('input[type="text"]').value = query.match(/=(\w+)/)[1];
