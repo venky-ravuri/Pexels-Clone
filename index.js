@@ -12,8 +12,13 @@ searchBtn.addEventListener("click", function() {
     }
 });
 
-query = sessionStorage.getItem('query') ? sessionStorage.getItem('query') : 'curated?per_page=20';
-document.querySelector('input[type="text"]').value = query.match(/=(\w+)/)[1];
+// query = sessionStorage.getItem('query') ? sessionStorage.getItem('query') : 'curated?per_page=20';
+if (sessionStorage.getItem("query")) {
+    query = sessionStorage.getItem("query");
+    document.querySelector('input[type="text"]').value = query.match(/=(\w+)/)[1];
+} else {
+    query = 'curated?per_page=20';
+}
 
 // first AJAX request content(for main content)
 const xhttp = new XMLHttpRequest();
@@ -55,13 +60,13 @@ xhttp.onreadystatechange = function() {
             if (i<photos.length/2) {
                 photosColumn1.insertAdjacentHTML("beforeend", `
                 <a class=image href=${photos[i].url}>
-                    <img src=${photos[i].src.medium} class="content-img">
+                    <img src=${photos[i].src.large} class="content-img">
                 </a>
                 `);
             } else {
                 photosColumn2.insertAdjacentHTML("beforeend", `
                 <a class=image href=${photos[i].url}>
-                    <img src=${photos[i].src.medium} class="content-img">
+                    <img src=${photos[i].src.large} class="content-img">
                 </a>
                 `);
             }
