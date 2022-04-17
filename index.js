@@ -5,6 +5,7 @@ const imageContainer = document.querySelector('.image-container');
 let query;
 
 searchBtn.addEventListener("click", function() {
+    // when search btn is clicked the serachBar value(URL encoded) is used to create query
     if (document.querySelector("input[type='text']").value) {
         query = `search?query=${encodeURIComponent(document.querySelector("input[type='text']").value.trim())}&per_page=20`;
         sessionStorage.clear();
@@ -12,6 +13,7 @@ searchBtn.addEventListener("click", function() {
     }
 });
 
+// if sessionStorage= has "query" item then query is the item in storage otherwise it's "curated"
 if (sessionStorage.getItem("query")) {
     query = sessionStorage.getItem("query");
     document.querySelector('input[type="text"]').value = query.match(/=(\w+)/)[1];
@@ -48,6 +50,7 @@ xhttp.onreadystatechange = function() {
         const response = JSON.parse(this.responseText);
         const photos = response.photos;
 
+        // appending the photoColumns inside the imageContainer 
         const photosColumn1 = document.createElement('div');
         photosColumn1.classList.add("photos-column-1");
         imageContainer.appendChild(photosColumn1);
@@ -55,6 +58,7 @@ xhttp.onreadystatechange = function() {
         photosColumn2.classList.add("photos-column-2");
         imageContainer.appendChild(photosColumn2);
 
+        // appending the images inside the photoColumns(half photos each)
         for (let i=0; i<photos.length; i++) {
             if (i<photos.length/2) {
                 photosColumn1.insertAdjacentHTML("beforeend", `
