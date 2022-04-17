@@ -44,8 +44,6 @@ xhttp.onreadystatechange = function() {
         const response = JSON.parse(this.responseText);
         const photos = response.photos;
 
-        console.log(photos.length);
-
         const photosColumn1 = document.createElement('div');
         photosColumn1.classList.add("photos-column-1");
         imageContainer.appendChild(photosColumn1);
